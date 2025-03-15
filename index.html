@@ -220,11 +220,13 @@
         </div>
 
         <div class="step" data-step="3">
-          <label for="mediaType">Is this a movie or TV show?</label>
+          <label for="mediaType">What type of media is this?</label>
           <select id="mediaType" name="mediaType" required>
             <option value="" disabled selected>Select media type</option>
             <option value="movie">Movie</option>
             <option value="tvshow">TV Show</option>
+            <option value="anime">Anime</option>
+            <option value="music">Music</option>
           </select>
         </div>
 
@@ -280,6 +282,25 @@
         const webhookUrl =
           "https://discord.com/api/webhooks/1304322032783327243/xRSCixin82dVnXUJICXlRN2Pq1xEDuxPkzJ6kL6kx2DDTG-24dg_dNA8Zclou3ELt39l";
 
+        // Create media type icon based on selection
+        let mediaIcon;
+        switch(data.mediaType) {
+          case "movie":
+            mediaIcon = "🎬 Movie";
+            break;
+          case "tvshow":
+            mediaIcon = "📺 TV Show";
+            break;
+          case "anime":
+            mediaIcon = "🎭 Anime";
+            break;
+          case "music":
+            mediaIcon = "🎵 Music";
+            break;
+          default:
+            mediaIcon = data.mediaType;
+        }
+
         const embed = {
           title: "New Media Request",
           color: 0x00ff87,
@@ -296,7 +317,7 @@
             },
             {
               name: "Type",
-              value: data.mediaType === "movie" ? "🎬 Movie" : "📺 TV Show",
+              value: mediaIcon,
               inline: true,
             },
           ],
